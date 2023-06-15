@@ -1,6 +1,66 @@
+<style>
+* {
+  font-family: Arial, 'sans-serif';
+}
 
+body {
+  margin: 0;
+  text-align: center;
+}
+
+.banner {
+  display: flex;
+  padding: 10px;
+  background-color: dodgerblue;
+  color: white;
+}
+
+.exchange {
+  background-color: yellowgreen;
+  margin: 10px;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.form {
+  display: flex;
+  justify-content: center;
+  margin-top: 25px;
+}
+
+.form-control {
+  margin: 10px;
+  border-radius: 5px;
+  width: 85%;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+}
+</style>
 <div>
-  <div>
+  <header class="banner">
     <h1>Currency Converter</h1>
-  </div>
+    <span *ngIf="exchangeRatesUSD > 0" class="exchange">1.0 USD = {{ exchangeRatesUSD }} UAH</span>
+    <span *ngIf="exchangeRatesUSD > 0" class="exchange">1.0 EUR = {{ exchangeRatesEUR }} UAH</span>  
+  </header>
+    <form [formGroup]="currencyForm" class="form">
+      <div class="column">
+        <select id="left_currency" formControlName="left_currency" (change)="onLeftCurrencyChanged()" class="form-control">
+          <option value="USD">USD</option>
+          <option value="EUR">EUR</option>
+          <option value="UAH">UAH</option>
+        </select>
+        <input id="left_value" type="text" formControlName="left_value" (change)="onLeftValueChanged()" class="form-control" />
+      </div>
+      <div class="column">
+        <select id="right_currency" formControlName="right_currency" (change)="onRightCurrencyChanged()" class="form-control">
+          <option value="USD">USD</option>
+          <option value="EUR">EUR</option>
+          <option value="UAH">UAH</option>
+        </select>
+        <input id="right_value" type="text" formControlName="right_value" (change)="onRightValueChanged()" class="form-control"/>
+      </div>
+    </form>
 </div>
